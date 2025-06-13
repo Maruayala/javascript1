@@ -1,150 +1,146 @@
-function saludar() {
+class Producto {
+  constructor(id, nombre, precio, cantidad = 1) {
+    this.id = id;
+    this.nombre = nombre;
+    this.precio = precio;
+    this.cantidad = cantidad;
+    this.subtotal = this.precio * this.cantidad;
+  }
 
-    alert("Bienvenida/o a Un poco de todo, gracias por visitarnos");
-}
-saludar();
-
-
-
-let string="Tienda online abierta 24/7"
-console.log(string);
-
-
-
-let nombre = prompt ("cual es tu nombre?");
-alert("hola " + nombre + ", gracias por visitarnos");
-console.log("hola " + nombre + ", gracias por visitarnos");
-
-let edad = prompt("¿Cuántos años tenés?");
-if (edad > 18) {
-alert("Eres mayor de edad,puedes comprar");
-console.log("Eres mayor de edad,puedes comprar");
-}
-else if (edad < 18){
-    alert("Eres menor de edad, no puedes comprar");
-    console.log("Eres menor de edad, no puedes comprar");
+  calcularSubtotal() {
+    this.subtotal = this.precio * this.cantidad;
+  }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Productos
 const productos = [
-    { nombre: "Samsung a55", precio: 4500, stock: 3 },
-    { nombre: "Auriculares", precio: 4000, stock: 8 },
-    { nombre: "Pc gamer", precio: 5000, stock: 2 },
-    { nombre: "Iphone 12pro", precio: 3500, stock: 3 },
-    { nombre: "Iphone 12pro max", precio: 7500, stock: 1 },
-    { nombre: "Joysting", precio: 8500, stock: 3 },
-    { nombre: "Play station 5", precio: 3000, stock: 3 },
-    { nombre: "Samsung s25 ultra", precio: 7500, stock: 5 },
-    { nombre: "Smart tv", precio: 9000, stock: 7 }
+  new Producto(1, "Samsung a55", 4500),
+  new Producto(2, "Auriculares", 4000),
+  new Producto(3, "Pc gamer", 5000),
+  new Producto(4, "Iphone 12pro", 3500),
+  new Producto(5, "Iphone 12pro max", 7500),
+  new Producto(6, "Joysting", 8500),
+  new Producto(7, "Play station 5", 3000),
+  new Producto(8, "Samsung s25 ultra", 7500),
+  new Producto(9, "Smart tv", 9000),
 ];
 
-console.log(productos);
+const carrito = [];
 
-
-let carrito = [];
-
-
-let seleccion = prompt("¿Desea ver nuestros productos? (si/no)");
-while (seleccion !== "si" && seleccion !== "no") {
-    alert("Ingrese una opción válida");
-    seleccion = prompt("¿Desea ver nuestros productos? (si/no)");
+//guardar carrito en localstorage//
+function guardarCarritoEnLocalStorage() {
+localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+// cargar carrito desde localStorage//
+function cargarCarritoDeLocalStorage() {
+const carritoGuardado = localStorage.getItem("carrito");
+if (carritoGuardado) {
+    const carritoParseado = JSON.parse(carritoGuardado);
+    carrito.length = 0; // Vaciar carrito actual
+    carritoParseado.forEach(item => {
+    const prod = new Producto(item.id, item.nombre, item.precio, item.cantidad);
+    prod.calcularSubtotal();
+    carrito.push(prod);
+    });
+}
+}
 
+document.addEventListener("DOMContentLoaded", () => {
+const nodoTitulo = document.getElementById("titulo");
+const iconoCarrito = document.getElementById("icono-carrito");
+const carritoContainer = document.getElementById("carrito-container");
+const listaCarrito = document.getElementById("lista-carrito");
+const totalCarrito = document.getElementById("total-carrito");
 
-if (seleccion === "si") {
-    alert("Estos son nuestros productos.");}
-    let seguirComprando = true;
+let nombre = prompt("Ingresa tu nombre");
+nodoTitulo.innerText = "Bienvenid@ " + nombre + " a nuestra tienda online";
 
-    while (seguirComprando) {
-    
-        // Mostrar productos
-    
-        let lista = "Estos son nuestros productos disponibles:\n";
-        lista += "1. Samsung a55 $4500\n";
-        lista += "2. Auriculares $4000\n";
-        lista += "3. Pc gamer $5000\n";
-        lista += "4. Iphone 12pro $3500\n";
-        lista += "5. Iphone 12pro max $7500\n";
-        lista += "6. Joysting $8500\n";
-        lista += "7. Play station 5 $3000\n";
-        lista += "8. Samsung s25 ultra $7500\n";
-        lista += "9. Smart tv $9000\n";
-        alert(lista);
-        // Selección de producto
-    
-        let eleccion = parseInt(prompt("Elegí un producto del 1 al 9 para agregar al carrito"));
-        if (eleccion >= 1 && eleccion <= productos.length) {
-            let productoElegido = productos[eleccion - 1];
-            carrito.push(productoElegido);
-            alert("Agregaste al carrito: " + productoElegido.nombre + " $" + productoElegido.precio);
-        } else {
-            alert("Producto no disponible");
-        }
+  // Cargar carrito guardado al iniciar//
+cargarCarritoDeLocalStorage();
+mostrarCarritoEnDOM();
 
-    
-        let agregarOtro = prompt("¿Deseás agregar otro producto? (si/no)");
-        while (agregarOtro !== "si" && agregarOtro !== "no") {
-            alert("Ingrese una opción válida");
-            agregarOtro = prompt("¿Deseás agregar otro producto? (si/no)");
-        }
+  // Escuchar botones comprar//
+document.querySelectorAll(".btn-comprar").forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+    const id = parseInt(e.target.getAttribute("data-id"));
+    const prod = productos.find((p) => p.id === id);
 
-        if (agregarOtro === "no") {
-            seguirComprando = false;
-        }
+    if (!prod) return;
+
+    const existente = carrito.find((item) => item.id === prod.id);
+    if (existente) {
+        existente.cantidad++;
+        existente.calcularSubtotal();
+    } else {
+        carrito.push(new Producto(prod.id, prod.nombre, prod.precio));
     }
 
+    guardarCarritoEnLocalStorage();
+    mostrarCarritoEnDOM();
+    });
+});
 
+  // Mostrar, ocultar carrito//
+iconoCarrito.addEventListener("click", () => {
+    carritoContainer.classList.toggle("mostrar");
+});
 
-    calcularPrecioFinal();
-    console.log("Productos en el carrito:");
-    for (let producto of carrito) {
-        console.log(producto.nombre + " $" + producto.precio);
+  // Ocultar carrito si clic afuera//
+document.addEventListener("click", (e) => {
+    if (
+    !carritoContainer.contains(e.target) &&
+    !iconoCarrito.contains(e.target)
+    ) {
+    carritoContainer.classList.remove("mostrar");
     }
+});
 
+  // Vaciar carrito //
+window.vaciarCarrito = () => {
+    carrito.length = 0;
+    guardarCarritoEnLocalStorage();
+    mostrarCarritoEnDOM();
+};
 
-// Función para total
-function calcularPrecioFinal() {
+  // Función para mostrar el carrito en el DOM//
+function mostrarCarritoEnDOM() {
+    listaCarrito.innerHTML = "";
     let total = 0;
-    for (let producto of carrito) {
-        total += producto.precio;
-    }
 
-    if (total > 0) {
-        alert("El total de tu compra es: $" + total);
-        console.log("El total de tu compra es: $" + total);
-    }
-}
+    carrito.forEach((prod) => {
+    const li = document.createElement("li");
+    li.className = "list-group-item";
+    li.textContent = `${prod.nombre} x${prod.cantidad} - $${prod.subtotal}`;
+    listaCarrito.appendChild(li);
+    total += prod.subtotal;
+    });
 
-function despedir() {
-    alert("Gracias por tu visita,esperamos verte pronto");
-}
+    totalCarrito.textContent = `Total: $${total}`;
+  }
+});
 
-despedir()
+
+
+
+
+
+const botones = document.querySelectorAll('.btn-comprar');
+
+
+botones.forEach(boton => {
+boton.innerText = 'Comprar ahora';
+});
+
+
+
+
+document.querySelectorAll('.btn-comprar');
+
+botones.forEach(boton => {
+boton.addEventListener('click', () => {
+    alert('El producto se ha agregado al carrito');
+});
+});
+
+
+
