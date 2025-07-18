@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Primer entrega JV</title>
     <!--Librerias-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -16,6 +16,32 @@
 
 <body>
 
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <!-- Indicadores -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Imágenes -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="imagenes/carousel.webp" class="d-block w-100" alt="Imagen 1">
+    </div>
+    <div class="carousel-item">
+      <img src="imagenes/carosuel2.webp" class="d-block w-100" alt="Imagen 2">
+    </div>
+  </div>
+
+  <!-- Botones de navegación personalizados -->
+  <button class="carousel-control-prev custom-arrow" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="arrow-icon">←</span>
+  </button>
+  <button class="carousel-control-next custom-arrow" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="arrow-icon">→</span>
+  </button>
+</div>
 
 
     <!--Encabezado-->
@@ -24,7 +50,6 @@
             <h1 id="titulo" class="titulo-principal">Electrogamer</h1>
         </div>
 
-        
 
 <header>
 <!--navegacion-->
@@ -34,9 +59,8 @@
     <!-- Links -->
     
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Crea tu cuenta</a></li>
-            <li><a href="#">Ingresa</a></li>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="/html/favoritos.html">Favoritos</a></li>
             <li><a href="#">Mis compras</a></li>
 </ul>
 
@@ -44,139 +68,255 @@
     <i id="icono-carrito" class="fas fa-shopping-cart fa-2x" style="cursor: pointer;"></i>
 
 <div id="carrito-container" class="carrito-oculto">
-<ul id="lista-carrito" class="list-group mb-2"></ul>
-<p id="total-carrito" class="fw-bold">Total: $0</p>
-<button class="btn btn-blue" onclick="vaciarCarrito()">Vaciar carrito</button>
+  <button id="cerrar-carrito" class="btn-cerrar">&times;</button>
+  <ul id="lista-carrito" class="list-group mb-2"></ul>
+  <p id="total-carrito" class="fw-bold">Total: $0</p>
+  <button class="btn btn-blue" onclick="vaciarCarrito()">Vaciar carrito</button>
+  
+  
+  
+  <!-- Formulario de compra -->
 
-</div>
+
+<<form id="formulario-carrito" action="https://formspree.io/f/xwpqpyqy" method="POST">
+  <h2>Finalizar compra</h2>
+
+  <div>
+    <label for="nombre">Nombre</label>
+    <input type="text" name="nombre" id="nombre" required>
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required>
+  </div>
+
+  <div>
+    <label for="direccion">Dirección</label>
+    <input type="text" name="direccion" id="direccion" required>
+  </div>
+
+
+  <!--aca van los productos -->
+  <input type="hidden" name="productos" id="productos-enviados">
+
+  <button type="submit">Enviar pedido</button>
+</form>
 
 
 </nav>
+<!--categorias-->
+  <label for="categoria-select">Seleccioná categoría:</label>
+  <select id="categoria-select">
+    <option value="">🏠 Inicio</option>
+    <option value="pc">🖥 PC</option>
+    <option value="celulares">📱 Celulares</option>
+    <option value="smart">📺 Smart</option>
+    <option value="zapatillas">👟 Zapatillas</option>
+  </select>
 
+
+ <!--aca se renderizan los productos-->
+    <div class="row justify-content-center" id="contenedor-productos">
+  
+    </div>
         <!--Productos-->
 
+<div class="productos container-fluid mt-5">
+  <div class="row justify-content-center">
     
-
-
-    <div class="productos">
-    
-    <div class="productos container mt-5">
-        <div class=" row justify-content-center">
-            <div class="col-md-4 mb-4">
-            <div class="card h-100">
-            <img src="imagenes/celular.jpg" class="card-img-top" alt="a25 ">
-            <div class="card-body">
-                <h5 class="card-title">Samsung a25</h5>
-                <p>$4000</p>
-                <button class="btn btn-comprar btn-primary" data-id="1">Comprar</button>
-            </div>
-            </div>
+<h2>Ofertas</h2>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/celular.jpg" class="card-img-top" alt="Samsung a25">
+        <div class="card-body">
+          <h5 class="card-title">Samsung a25</h5>
+          <p>$4000</p>
+          <button class="btn btn-primary btn-comprar" data-id="1">Comprar</button>
         </div>
-    
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-            <img src="imagenes/auriculares.jpg" class="card-img-top" alt="auriculares">
-            <div class="card-body">
-                <h5 class="card-title">Auriculares</h5>
-                <p>$4000</p>
-                <button class="btn btn-comprar btn-primary" data-id="2">Comprar</button>
-            </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-            <img src="imagenes/computadora.png" class="card-img-top" alt="Pc Gammer">
-            <div class="card-body">
-                <h5 class="card-title">Pc gamer</h5>
-            
-                <p>$5000</p>
-                    <button class="btn btn-comprar btn-primary" data-id="3">Comprar</button>
-            </div>
-            </div>
-        </div>
-    
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-            <img src="imagenes/iphone.webp" class="card-img-top" alt="iphone 12pro">
-            <div class="card-body">
-                <h5 class="card-title">Iphone 12pro</h5>
-                <p>$3500</p>
-                    <button class="btn btn-comprar btn-primary" data-id="4">Comprar</button>
-            </div>
-            </div>
-        </div>
-    
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-            <img src="imagenes/iphone2.jpg" class="card-img-top" alt="iphone 12pro max">
-            <div class="card-body">
-                <h5 class="card-title">Iphone 12pro max</h5>
-        
-                <p>$7500</p>
-             <button class="btn btn-comprar btn-primary" data-id="5">Comprar</button>
-            </div>
-        </div>
+      </div>
     </div>
-    
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-            <img src="imagenes/joysting.jpg" class="card-img-top" alt="joysting">
-            <div class="card-body">
-                <h5 class="card-title">joysting</h5>
-        
-                <p>$8500</p>
-                      <button class="btn btn-comprar btn-primary" data-id="6">Comprar</button>
-            </div>
-            </div>
-        </div>
 
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-            <img src="imagenes/play5.jpg" class="card-img-top" alt="Play5">
-            <div class="card-body">
-                <h5 class="card-title">Play station 5</h5>
-    
-                <p>$3000</p>
-                      <button class="btn btn-comprar btn-primary" data-id="7">Comprar</button>
-            </div>
-            </div>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/auriculares.jpg" class="card-img-top" alt="Auriculares">
+        <div class="card-body">
+          <h5 class="card-title">Auriculares</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="2">Comprar</button>
         </div>
-        
-    
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/computadora.png" class="card-img-top" alt="Pc Gamer">
+        <div class="card-body">
+          <h5 class="card-title">Pc gamer</h5>
+          <p>$5000</p>
+          <button class="btn btn-comprar btn-primary" data-id="3">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/iphone.webp" class="card-img-top" alt="iPhone 12pro">
+        <div class="card-body">
+          <h5 class="card-title">Iphone 12pro</h5>
+          <p>$3500</p>
+          <button class="btn btn-comprar btn-primary" data-id="4">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/iphone2.jpg" class="card-img-top" alt="iPhone 12pro max">
+        <div class="card-body">
+          <h5 class="card-title">Iphone 12pro max</h5>
+          <p>$7500</p>
+          <button class="btn btn-comprar btn-primary" data-id="5">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/joysting.jpg" class="card-img-top" alt="Joystick">
+        <div class="card-body">
+          <h5 class="card-title">Joystick</h5>
+          <p>$8500</p>
+          <button class="btn btn-comprar btn-primary" data-id="6">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/play5.jpg" class="card-img-top" alt="PlayStation 5">
+        <div class="card-body">
+          <h5 class="card-title">Play station 5</h5>
+          <p>$3000</p>
+          <button class="btn btn-comprar btn-primary" data-id="7">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/s25 ultra.png" class="card-img-top" alt="Samsung s25">
+        <div class="card-body">
+          <h5 class="card-title">Samsung s25</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="8">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/smart tv.webp" class="card-img-top" alt="Smart TV 75">
+        <div class="card-body">
+          <h5 class="card-title">Smart TV 75</h5>
+          <p>$9000</p>
+          <button class="btn btn-comprar btn-primary" data-id="9">Comprar</button>
+        </div>
+      </div>
+    </div>
+  
+  <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/pc2.png" class="card-img-top" alt="pc completa">
+        <div class="card-body">
+          <h5 class="card-title">Pc completa</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="10">Comprar</button>
+        </div>
+      </div>
+    </div>
+  <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/auriculares21.png" class="card-img-top" alt="Auriculares inalambricos">
+        <div class="card-body">
+          <h5 class="card-title">Auriculares inalambricos</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="11">Comprar</button>
+        </div>
+      </div>
+    </div>
+  <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/iPad.webp" class="card-img-top" alt="iPad">
+        <div class="card-body">
+          <h5 class="card-title">iPad</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="12">Comprar</button>
+        </div>
+      </div>
+    </div>
       <div class="col-md-4 mb-4">
-            <div class="card h-100">
-            <img src="imagenes/s25 ultra.png" class="card-img-top" alt="s25 ">
-            <div class="card-body">
-                <h5 class="card-title">Samsung s25</h5>
-                <p>$4000</p>
-                <button class="btn btn-comprar btn-primary" data-id="8">Comprar</button>
-            </div>
-            </div>
+      <div class="card h-100">
+        <img src="imagenes/silla.png" class="card-img-top" alt="silla gamer">
+        <div class="card-body">
+          <h5 class="card-title">Silla Gamer</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="13">Comprar</button>
         </div>
-    
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-            <img src="imagenes/smart tv.webp" class="card-img-top" alt="Smart tv">
-            <div class="card-body">
-                <h5 class="card-title">Smart tv 75</h5>
-
-                <p>$9000</p>
-                    <button class="btn btn-comprar btn-primary" data-id="9">Comprar</button>
-                </div>
-            </div>
-        </div>
-
-            
-        
-        </div> 
+      </div>
     </div>
-        
-    
-    
-    
-   
+      <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/smart.jpg" class="card-img-top" alt="Smart 4k">
+        <div class="card-body">
+          <h5 class="card-title">Smart 4k</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="14">Comprar</button>
+        </div>
+      </div>
+    </div>
 
+      <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/parlante.png" class="card-img-top" alt="torre">
+        <div class="card-body">
+          <h5 class="card-title">Torre</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="15">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+      <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/proyector.png" class="card-img-top" alt="Proyector led">
+        <div class="card-body">
+          <h5 class="card-title">Proyector led</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="16">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+      <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="imagenes/consola4.png" class="card-img-top" alt="Consola">
+        <div class="card-body">
+          <h5 class="card-title">Consola</h5>
+          <p>$4000</p>
+          <button class="btn btn-comprar btn-primary" data-id="17">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+    
+
+<!-- Footer -->
 <footer class="footer">
 <p>&copy; 2025  Todos los derechos reservados.</p>
 <div class="footer-links">
@@ -191,6 +331,8 @@
 
 </body>
 
+<!--SCRIPT-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="main.js"></script>
-
 </html>

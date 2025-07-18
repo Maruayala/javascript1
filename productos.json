@@ -1,0 +1,245 @@
+[
+
+    {
+    "id": 19,
+    "categoria": "zapatillas",
+    "nombre": "Nike Jordan",
+    "precio": 4000,
+    "imagen": "imagenes/nikejordan.webp",
+    "cantidad": 1
+},
+    {
+    "id": 20,
+    "categoria": "zapatillas",
+    "nombre": "Nike Jordan",
+    "precio": 8500,
+    "imagen": "imagenes/nikejordan2.jpg",
+    "cantidad": 1
+},
+    {
+    "id": 21,
+    "categoria": "zapatillas",
+    "nombre": "Nike Forius",
+    "precio": 5000,
+    "imagen": "imagenes/airmaxfiryus.png",
+    "cantidad": 1
+},
+
+    {
+    "id": 23,
+    "categoria": "zapatillas",
+    "nombre": "Adidas Campus",
+    "precio": 7500,
+    "imagen": "imagenes/adidascampues.png",
+    "cantidad": 1
+},
+    {
+    "id": 24,
+    "categoria": "zapatillas",
+    "nombre": "Vans negras",
+    "precio": 8500,
+    "imagen": "imagenes/vans.webp",
+    "cantidad": 1
+},
+    {
+    "id": 25,
+    "categoria": "zapatillas",
+    "nombre": "Vans rosas",
+    "precio": 3000,
+    "imagen": "imagenes/vans2.jpg",
+    "cantidad": 1
+},
+    {
+    "id": 26,
+    "categoria": "zapatillas",
+    "nombre": "Vans",
+    "precio": 7500,
+    "imagen": "imagenes/vans3.png",
+    "cantidad": 1
+},
+   
+    {
+    "id": 28,
+    "categoria": "celulares",
+    "nombre": "Samsung a23 5G",
+    "precio": 10000,
+    "imagen": "imagenes/celular1.png",
+    "cantidad": 1
+},
+    {
+    "id": 29,
+    "categoria": "celulares",
+    "nombre": "Samsung a24",
+    "precio": 40000,
+    "imagen": "imagenes/celular2.webp",
+    "cantidad": 1
+},
+    {
+    "id": 30,
+    "categoria": "celulares",
+    "nombre": "Samsung a54 5G",
+    "precio": 50000,
+    "imagen": "imagenes/celular3.webp",
+    "cantidad": 1
+},
+    {
+    "id": 31,
+    "categoria": "celulares",
+    "nombre": "Moto g32",
+    "precio": 35000,
+    "imagen": "imagenes/celular4.png",
+    "cantidad": 1
+},
+
+    {
+    "id": 33,
+    "categoria": "celulares",
+    "nombre": "Samsung a30s",
+    "precio": 85000,
+    "imagen": "imagenes/celular6.png",
+    "cantidad": 1
+},
+    {
+    "id": 34,
+    "categoria": "celulares",
+    "nombre": "Samsung S21 FE 5G",
+    "precio": 30000,
+    "imagen": "imagenes/celular7.webp",
+    "cantidad": 1
+},
+    {
+    "id": 35,
+    "categoria": "celulares",
+    "nombre": "Samsung S24+",
+    "precio": 10000,
+    "imagen": "imagenes/celular8.avif",
+    "cantidad": 1
+},
+    {
+    "id": 36,
+    "categoria": "celulares",
+    "nombre": "iPhone 12",
+    "precio": 40000,
+    "imagen": "imagenes/celular9.png",
+    "cantidad": 1
+},
+    {
+    "id": 37,
+    "categoria": "pc",
+    "nombre": "Pc gamer",
+    "precio": 40000,
+    "imagen": "imagenes/pc1.jpg",
+    "cantidad": 1
+},
+    {
+    "id": 38,
+    "categoria": "pc",
+    "nombre": "Pc intel",
+    "precio": 40000,
+    "imagen": "imagenes/pc2.jpg",
+    "cantidad": 1
+},
+    {
+    "id": 39,
+    "categoria": "pc",
+    "nombre": "Pc completa",
+    "precio": 4000,
+    "imagen": "imagenes/pc3.jpg",
+    "cantidad": 1
+},
+    {
+    "id": 40,
+    "categoria": "pc",
+    "nombre": "Gabinete gamer",
+    "precio": 40000,
+    "imagen": "imagenes/pc4.webp",
+    "cantidad": 1
+},
+    {
+    "id": 41,
+    "categoria": "pc",
+    "nombre": "Gabinete gamer 2",
+    "precio": 4000,
+    "imagen": "imagenes/pc5.webp",
+    "cantidad": 1
+},
+    {
+    "id": 42,
+    "categoria": "pc",
+    "nombre": "Pc full gamer",
+    "precio": 4000,
+    "imagen": "imagenes/pc6.png",
+    "cantidad": 1
+},
+
+
+{
+    "id": 44,
+    "categoria": "pc",
+    "nombre": "Gabinete",
+    "precio": 5000,
+    "imagen": "imagenes/pc7.jpg",
+    "cantidad": 1
+},
+    {
+    "id": 45,
+    "categoria": "pc",
+    "nombre": "Pc completa gamer",
+    "precio": 40000,
+    "imagen": "imagenes/pc8.jpg",
+    "cantidad": 1
+},
+
+
+    {
+    "id": 46,
+    "categoria": "Smart",
+    "nombre": "Smart tv 50",
+    "precio": 40000,
+    "imagen": "imagenes/smart1.png",
+    "cantidad": 1
+},
+    {
+    "id": 47,
+    "categoria": "smart",
+    "nombre": "Smart tv 4k 50 pulgadas",
+    "precio": 70000,
+    "imagen": "imagenes/smart2.png",
+    "cantidad": 1
+},
+    {
+    "id": 48,
+    "categoria": "smart",
+    "nombre": "Smart tv 4k 65 pulgadas",
+    "precio": 450000,
+    "imagen": "imagenes/smart3.png",
+    "cantidad": 1
+},
+    {
+    "id": 49,
+    "categoria": "smart",
+    "nombre": "Smart tv 43 pulgadas",
+    "precio": 70000,
+    "imagen": "imagenes/smart4.jpg",
+    "cantidad": 1
+},
+    {
+    "id": 50,
+    "categoria": "smart",
+    "nombre": "Smart tv 4k",
+    "precio": 90000,
+    "imagen": "imagenes/smart5.jpg",
+    "cantidad": 1
+},
+    {
+    "id": 51,
+    "categoria": "smart",
+    "nombre": "Smart tv 8k 55 pulgadas",
+    "precio": 200000,
+    "imagen": "imagenes/smart6.jpg",
+    "cantidad": 1
+}
+
+
+
+]
