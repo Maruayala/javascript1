@@ -94,49 +94,92 @@ function mostrarCarritoEnDOM() {
   totalCarrito.textContent = `Total: $${total}`;
 }
 
-function mostrarProductos(categoria) {
-  contenedor.innerHTML = "";
-  const filtrados = productosConCategoria.filter(p => p.categoria === categoria);
-  if (filtrados.length === 0) {
-    contenedor.innerHTML = '<p>No hay productos para esta categoría.</p>';
-    return;
-  }
-  filtrados.forEach(p => {
-    const card = document.createElement("div");
-    card.classList.add("col-md-4", "mb-4");
-    card.innerHTML = `
-      <div class="card h-100">
-        <img src="${p.imagen}" class="card-img-top" alt="${p.nombre}" />
-        <div class="card-body">
-          <h5 class="card-title">${p.nombre}</h5>
-          <p class="card-text">Precio: $${p.precio}</p>
-          <button class="btn btn-primary btn-comprar" data-id="${p.id}">Comprar</button>
-        </div>
-      </div>
-    `;
-    contenedor.appendChild(card);
+
+
+//sweetalert para finalizar compra
+document.addEventListener("DOMContentLoaded", () => {
+  const formulario = document.getElementById("formulario-carrito");
+
+  formulario.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    Swal.fire({
+      title: "¿Desea finalizar con la compra?",
+      showDenyButton: true,
+      confirmButtonText: "Finalizar",
+      denyButtonText: "Volver al carrito"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Cargar productos del carrito en el oculto
+        const inputProductos = document.getElementById("productos-enviados");
+        inputProductos.value = carrito.map(prod => `${prod.nombre} x${prod.cantidad} - $${prod.subtotal}`).join("\n");
+
+        // Crear formData para enviar
+        const formData = new FormData(formulario);
+
+        // enviar con fetch
+        fetch("https://formspree.io/f/xwpqpyqy", {
+          method: "POST",
+          headers: {
+            Accept: "application/json"
+          },
+          body: formData
+        })
+          .then((response) => {
+            if (response.ok) {
+              Swal.fire("¡Compra confirmada!", "Tu pedido fue enviado", "success");
+              carrito = [];
+              localStorage.setItem("carrito", JSON.stringify(carrito)); // limpiar localStorage
+              mostrarCarritoEnDOM();
+              formulario.reset();
+            } else {
+              Swal.fire("Error", "No se pudo enviar el formulario", "error");
+            }
+          })
+          .catch(() => {
+            Swal.fire("Error", "Fallo de conexión", "error");
+          });
+      } else if (result.isDenied) {
+        Swal.fire("Compra cancelada", "Volverás al carrito", "info");
+      }
+    });
   });
-}
+});
+
+
+
+
 let productosConCategoria = [];
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const URL = "productos.json";
 
-  // Cargar productos desde JSON
   function cargarCategorias(){
     fetch(URL)
       .then(response => response.json())
       .then(data => {
-      productosConCategoria = data;
-        renderCategorias(data);
-})
+        productosConCategoria = data;
+        renderCategorias(data); // Muestra todos por defecto
+      })
       .catch(error => console.error("Error cargando productos:", error));
   }
 
   cargarCategorias();
 
+  selectCategoria.addEventListener("change", () => {
+    const categoriaSeleccionada = selectCategoria.value;
+
+    if (categoriaSeleccionada === "todas") {
+      renderCategorias(productosConCategoria);
+    } else {
+      const filtrados = productosConCategoria.filter(producto => producto.categoria === categoriaSeleccionada);
+      renderCategorias(filtrados);
+    }
+  });
 
   function renderCategorias(productos) {
-    contenedor.innerHTML = ""; // limpiar antes de mostrer
+    contenedor.innerHTML = "";
     productos.forEach(producto => {
       const card = document.createElement("div");
       card.classList.add("col-md-4", "mb-4");
@@ -153,6 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
       contenedor.appendChild(card);
     });
   }
+});
+
 
   // Cargar carrito guardado
   cargarCarritoDeLocalStorage();
@@ -167,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mostrarProductos(categoria);
     }
   });
-});
+
 
 
 
